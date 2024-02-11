@@ -1,12 +1,14 @@
 package org.utech.productservice.services;
 
+import org.utech.productservice.models.Product;
+
 import java.util.List;
 
 public interface ProductService {
 
-    String getProductById(Long id);
+    Product getProductById(Long id);
 
-    List<String> getAllProducts();
+    List<Product> getAllProducts();
 
     String deleteProductById(Long id);
 }

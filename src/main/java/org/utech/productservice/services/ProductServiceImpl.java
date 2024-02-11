@@ -1,20 +1,21 @@
 package org.utech.productservice.services;
 
 import org.springframework.stereotype.Service;
+import org.utech.productservice.models.Product;
 
 import java.util.List;
 
-@Service
+@Service("ProductService")
 public class ProductServiceImpl implements ProductService {
 
 
     @Override
-    public String getProductById(Long id) {
-        return "Product fetch with id: " + id;
+    public Product getProductById(Long id) {
+        return null;
     }
 
     @Override
-    public List<String> getAllProducts() {
+    public List<Product> getAllProducts() {
         return null;
     }
 
@@ -22,4 +23,6 @@ public class ProductServiceImpl implements ProductService {
     public String deleteProductById(Long id) {
         return null;
     }
+
+
 }
