@@ -2,9 +2,10 @@ package org.utech.productservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.utech.productservice.exceptions.ExceptionDto;
+import org.utech.productservice.exceptions.ProductNotFoundException;
 import org.utech.productservice.models.Product;
 import org.utech.productservice.services.ProductService;
 
@@ -32,7 +33,9 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
-//    public String getProductByCategory(String category){
-//
-//    }
+    @PostMapping("/products")
+    public String createProduct(){
+        return "";
+    }
+
 }

@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.utech.productservice.dto.FakeStoreProductDto;
+import org.utech.productservice.exceptions.ProductNotFoundException;
 import org.utech.productservice.models.Category;
 import org.utech.productservice.models.Product;
 
@@ -26,6 +27,9 @@ public class FakeStoreProductServiceImpl implements ProductService {
     public Product getProductById(Long id) {
         RestTemplate restTemplate = restTemplateBuilder.build();
         ResponseEntity<FakeStoreProductDto> response = restTemplate.getForEntity(productUrl + id, FakeStoreProductDto.class);
+        if(response.getBody() == null){
+            throw new ProductNotFoundException("Product Not Found with id: " + id);
+        }
         Product product = getProductFromFakeStoreProductDto(response.getBody());
         return product;
     }
@@ -50,7 +54,7 @@ public class FakeStoreProductServiceImpl implements ProductService {
         Product product = new Product();
         product.setId(fakeStoreProductDto.getId());
         product.setTitle(fakeStoreProductDto.getTitle());
-        product.setDesc(fakeStoreProductDto.getDescription());
+        product.setDescription(fakeStoreProductDto.getDescription());
         product.setPrice(fakeStoreProductDto.getPrice());
         Category category = new Category();
         category.setTitle(fakeStoreProductDto.getCategory());
