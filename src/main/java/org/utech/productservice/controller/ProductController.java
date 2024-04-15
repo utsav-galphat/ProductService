@@ -2,40 +2,49 @@ package org.utech.productservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.utech.productservice.exceptions.ExceptionDto;
-import org.utech.productservice.exceptions.ProductNotFoundException;
+import org.utech.productservice.ResponseDto.ProductResponseDto;
 import org.utech.productservice.models.Product;
+import org.utech.productservice.requestDto.ProductRequestDto;
 import org.utech.productservice.services.ProductService;
 
 
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class ProductController {
 
-    private ProductService productService;
+    private final ProductService productService;
 
     @Autowired
-    public ProductController(@Qualifier("FakeStoreProductService") ProductService productService){
+    public ProductController(@Qualifier("ProductService") ProductService productService) {
         this.productService = productService;
     }
 
     @GetMapping("/products/{id}")
-    public Product getProductById(@PathVariable("id") Long id){
+    public ProductResponseDto getProductById(@PathVariable("id") UUID id) {
         return productService.getProductById(id);
     }
 
     @GetMapping("/products")
-    public List<Product> getAllProducts(){
+    public List<ProductResponseDto> getAllProducts() {
         return productService.getAllProducts();
     }
 
     @PostMapping("/products")
-    public String createProduct(){
-        return "";
+    public ProductResponseDto createProduct(@RequestBody ProductRequestDto productRequest) {
+        return productService.saveProduct(productRequest);
     }
 
+    @PutMapping("/products")
+    public ProductResponseDto updateProduct(@RequestBody ProductRequestDto productRequest) {
+        return productService.updateProduct(productRequest);
+    }
+
+    @DeleteMapping("/products/{id}")
+    public String deleteProduct(@PathVariable("id") UUID id) {
+        return productService.deleteProductById(id);
+    }
 }

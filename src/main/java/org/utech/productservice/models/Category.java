@@ -1,15 +1,23 @@
 package org.utech.productservice.models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+
+import java.util.UUID;
 
 @Getter
 @Setter
 @Entity
-public class Category extends BaseModel{
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class Category{
     @Id
-    Long id;
-    String title;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
+    private String title;
 }

@@ -20,5 +20,4 @@ public class ProductControllerAdvice {
         exceptionDto.setStatus("Failure");
         return exceptionDto;
     }
-
 }
